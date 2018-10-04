@@ -1,1 +1,7 @@
 
+mark
+利用 C++ 面向对象的设计思想，借助 pthread 简单实现 C++11 的 std::mutex 和 std::lock_guard
+
+存在的问题
+1. 没能写入命名空间
+2. 线程同步上还存在问题，没做到 std::this_thread::get_id()
