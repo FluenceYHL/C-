@@ -1,10 +1,3 @@
-/*  尚未解决的问题 :
-	1. 只支持二维,而不支持三维或更高,需要模板元
-	2. 尚未实现如何删除离群点, 即预处理
-	3. 尚未可视化
-	4. 尚未实现层次聚类版
-*/
-
 #include <iostream>
 #include <functional>
 #include <fstream>
@@ -47,8 +40,8 @@ std::vector< point > readData(const std::string& path) {  // std::unique_ptr
 		in >> x >> y;
 		dataSet.emplace_back(std::make_tuple<double, double>(std::move(x), std::move(y)));
 	}
-	for(const auto& it : dataSet)
-		std::cout << std::get<0>(it) << "\t" << std::get<1>(it) << "\n";
+	// for(const auto& it : dataSet)
+	// 	std::cout << std::get<0>(it) << "\t" << std::get<1>(it) << "\n";
 	return dataSet;
 }
 
@@ -121,7 +114,7 @@ std::vector< oneCluster > K_means(const oneCluster& dataSet, const int k,
 	std::vector< oneCluster > clusters;
 	clusters.assign(k, oneCluster());
 
-	double oldValue = 0.00, newValue = 0.00; int cnt = 0;
+	double oldValue = 1.00, newValue = 1.00; int cnt = 0;
 
 	while(true) {
 		std::cout << "\n\n********** 第 " << ++cnt << "  次聚类 ************\n\n";
@@ -132,7 +125,7 @@ std::vector< oneCluster > K_means(const oneCluster& dataSet, const int k,
 			assert(0 <= label and label < k);
 			clusters[label].emplace_back(it);
 		}
-		print(clusters);
+		// print(clusters);
 
 		// 重新计算每个簇的中心点
 		for(int i = 0;i < k; ++i) {
@@ -144,19 +137,47 @@ std::vector< oneCluster > K_means(const oneCluster& dataSet, const int k,
 		// 重新衡量这次的最小函数值
 		oldValue = newValue;  // 先存储上次的最小均方差之和
 		newValue = getEvaluate(clusters, centers);
-		if(abs(newValue - oldValue) < thresholdValue) // 如果变化小于阈值,就结束
+		std::cout << "oldValue  :  " << oldValue << "\n";
+		std::cout << "newValue  :  " << newValue << "\n";
+		if(abs(oldValue - newValue) / newValue < thresholdValue) // 如果变化小于阈值,就结束
 			return clusters; // NVO
 
 		// 每次聚类,得到的聚类都是不一样的,所以上次的记录要清空
 		for(auto &it : clusters) 
 			it.clear();
 	}
-	return std::vector< oneCluster >();
+	return std::vector<oneCluster>();
 }
 
 int main() {
 	auto dataSet = readData("k-means(1).txt");
-	auto clusters = K_means(dataSet, 3, 0.5);
+	auto clusters = K_means(dataSet, 3, 1e-3);
 	print(clusters);
 	return 0;
 }
+
+/*  尚未解决的问题 :
+	1. 只支持二维,而不支持三维或更高,需要模板元
+	其实,实现多维也不难,只要把 std::tuple 中的点类型改成高维即可,例如 (x, (y, z))
+	2. 尚未实现如何删除离群点, 即预处理
+	3. 尚未可视化
+	4. 尚未实现层次聚类版
+	5. 未能实现多次聚类,取最佳值......
+    实践如下:
+    auto dataSet = readData("k-means(1).txt");
+	auto dataSize = dataSet.size();
+
+	std::pair< std::vector<oneCluster>, double> ans;
+	std::vector<oneCluster> clusters;
+	double bestValue = 1e9;
+
+	for(int i = 2;i < sqrt(dataSize); ++i) {
+		ans = K_means(dataSet, i, 0.5);
+		std::cout << "&&&&&&&&& " << ans.second << "\n\n"; 
+		if(bestValue > ans.second) {
+			clusters.swap(ans.first);
+			bestValue = ans.second;
+		}
+	}
+	print(clusters);
+*/
