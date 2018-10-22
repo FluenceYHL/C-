@@ -2,12 +2,15 @@
 #include "ui_visualization.h"
 #include "k_means.h"
 #include <QDebug>
+#include <QMessageBox>
 
 visualization::visualization(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::visualization)
 {
     ui->setupUi(this);
+    ui->K->setText ("3");
+    ui->threshold->setText(QString::number (0.001));
 }
 
 visualization::~visualization()
@@ -70,12 +73,29 @@ void visualization::on_choose_data_clicked()
     // 保存图片
     QString path = QApplication::applicationDirPath () + "/" + "dataSet.png";
     ui->Coordinate->savePng (path);
+    this->setWindowTitle (fileName);
 }
 
 void visualization::on_K_mean_clicked()
 {
+    if(!this->data) {
+        QMessageBox::warning (this, "警告!", "尚未选择文件", QMessageBox::Yes);
+        return;
+    }
+    if(ui->K->text ().isEmpty ()) {
+        QMessageBox::warning (this, "警告!", "请输入 K 值", QMessageBox::Yes);
+        return;
+    }
+    if(ui->threshold->text ().isEmpty ()) {
+        QMessageBox::warning (this, "警告!", "请输入 阈值", QMessageBox::Yes);
+        return;
+    }
     qDebug() << "开始聚类\n";
-    auto &ans = this->data->getCluster ();
+    auto K = ui->K->text ().toInt();
+    auto threshold = ui->threshold->text ().toDouble ();
+    qDebug() << "K  :  " << K;
+    qDebug() << "thres :" << threshold;
+    auto &ans = this->data->getCluster (K, threshold);
     this->data->display ();
 
     auto evaluate = std::get<2>(ans);

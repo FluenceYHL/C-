@@ -24,7 +24,6 @@ namespace YHL {
     public:
         K_means(const std::string& path = "k-means_check.txt");
         oneCluster& getDataSet();
-        answerType& getCluster();
         void display () const;
         const answerType& getCluster(const int k, const double thresholdValue);
     private:

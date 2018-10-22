@@ -24,12 +24,6 @@ oneCluster &YHL::K_means::getDataSet()
     return this->dataSet;
 }
 
-answerType &YHL::K_means::getCluster()
-{
-    this->ans = this->getCluster (3, 0.5);
-    return this->ans;
-}
-
 void YHL::K_means::readData(const std::string &path)
 {
     std::ifstream in(path.c_str());
@@ -58,17 +52,20 @@ void YHL::K_means::checkException(const double thresholdValue)
     int rSize = static_cast<int>(centers.size());
     assert(lSize == rSize);
     for(int i = 0;i < lSize; ++i) {
+        qDebug() << "1";
         std::vector<double> arr;
-        int r = static_cast<int>(clusters[i].size());
+        int r = static_cast<int>(clusters[i].size()); qDebug() << "2";
         // 求得这个簇中每个点和中心的距离
         for(int j = 0;j < r; ++j) {
             arr.emplace_back(getDistance(clusters[i][j], centers[i]));
-        }
+        }qDebug() << "3";
         // 求得中位数的大小
         auto temp = arr;
-        std::sort(temp.begin(), temp.end());
+        std::sort(temp.begin(), temp.end()); qDebug() << "4";
         int midSize = temp.size() >> 1;
-        auto edge = temp[midSize];
+        qDebug() << "midSize  :  " << midSize;
+        qDebug() << "temp     :  " << temp.size ();
+        auto edge = temp[midSize]; qDebug() << "5";
 
         // 与中位数的比值 > 阈值的点在 数据集 中删除
         std::vector<point> ans, target;
@@ -92,11 +89,13 @@ void YHL::K_means::checkException(const double thresholdValue)
         }
         qDebug () << "\n数据集长度  :  " << dataSet.size() << "\n\n";
     }
+    qDebug() << "出来了";
 }
 
 const answerType& YHL::K_means::getCluster
     (const int k, const double thresholdValue)
 {
+
     // 还可以预处理,删掉极端点
     auto dataSize = dataSet.size();
     assert(k <= dataSize); // 如果聚类数 > 数据量,这是错误的
@@ -204,6 +203,8 @@ point YHL::getCenter(const oneCluster &one)
         mean_y += std::get<1>(it);  // 取纵坐标
     }
     int scale = static_cast<int>(one.size());
+    if(scale == 0)  // 这里要特别注意
+        scale = 1;
     return std::make_tuple<double, double>(mean_x / scale, mean_y / scale);
 }
 
