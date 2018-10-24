@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include <memory>
+#include <qcustomplot.h>
 
 namespace Ui {
 class Visualization;
@@ -20,8 +21,7 @@ public:
     ~Visualization();
 
 private:
-    void display();
-
+    void display(QColor color);
 private slots:
     void on_close_button_clicked();
 
@@ -38,6 +38,7 @@ private:
     std::unique_ptr<YHL::Hierarchical> data;
     void closeEvent(QCloseEvent*);
     QColor getColor(QList<QColor>& colors);
+    QVector<double> xVec, yVec;
 };
 
 #endif // VISUALIZATION_H

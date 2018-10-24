@@ -35,6 +35,7 @@ namespace YHL {
         std::vector<int> head;
         std::vector<int> color;
         std::unordered_map<int, std::list<int> > clusters;
+        std::unordered_map<int, int> others;
         std::string path;
     private:
         void DFS(const int u);
@@ -43,6 +44,7 @@ namespace YHL {
     public:
         void readData(const std::string& _path = "hierarchical.txt");
         const ansType getClusters(const double threshold);
+        const std::unordered_map<int, int>& getOthers();
         const oneCluster& getDataSet() const;
     };
 }

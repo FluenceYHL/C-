@@ -75,13 +75,22 @@ const YHL::Hierarchical::ansType YHL::Hierarchical::getClusters
     // 后期处理离群点
     auto it = clusters.begin ();
     while(it not_eq clusters.end ()) {
-        if(it->second.size () < 5)
+        if(it->second.size () < 5) {
+            for(auto r : it->second) {
+                others.emplace(r, 1);
+            }
             it = clusters.erase (it);
+        }
         else ++it;
     }
     // 为下次聚类判断是否要读文件做铺垫
     this->len = 0;
     return this->clusters;
+}
+
+const std::unordered_map<int, int>& YHL::Hierarchical::getOthers()
+{
+    return this->others;
 }
 
 // 读取数据
