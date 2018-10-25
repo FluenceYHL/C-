@@ -26,13 +26,17 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-        doodleboard.cpp
+        doodleboard.cpp \
+    number.cpp
 
 HEADERS += \
-        doodleboard.h
+        doodleboard.h \
+    number.h \
+    scopeguard.h
 
 FORMS += \
-        doodleboard.ui
+        doodleboard.ui \
+    number.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

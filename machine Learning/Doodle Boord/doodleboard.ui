@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
+    <width>774</width>
     <height>500</height>
    </rect>
   </property>
@@ -14,12 +14,41 @@
    <string>doodleBoard</string>
   </property>
   <widget class="QWidget" name="centralWidget">
+   <widget class="QPushButton" name="recognize">
+    <property name="geometry">
+     <rect>
+      <x>600</x>
+      <y>430</y>
+      <width>71</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+
+}
+QPushButton:pressed{
+background-color:rgba(100,255,100,200);
+border-color:rgba(255,255,255,30);
+border-style:inset;
+color:rgba(0,0,0,100);
+}
+QPushButton:hover{
+background-color:rgba(100,255,100,100);
+border-color:rgba(255,255,255,200);
+color:rgba(0,0,0,200);
+}</string>
+    </property>
+    <property name="text">
+     <string>识别</string>
+    </property>
+   </widget>
    <widget class="QLabel" name="result">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>10</y>
-      <width>291</width>
+      <x>420</x>
+      <y>20</y>
+      <width>331</width>
       <height>371</height>
      </rect>
     </property>
@@ -27,40 +56,88 @@
      <string/>
     </property>
    </widget>
-   <widget class="QPushButton" name="recognize">
-    <property name="geometry">
-     <rect>
-      <x>380</x>
-      <y>410</y>
-      <width>71</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>识别</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="close_button">
     <property name="geometry">
      <rect>
-      <x>470</x>
-      <y>410</y>
+      <x>690</x>
+      <y>430</y>
       <width>71</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+
+}
+QPushButton:pressed{
+background-color:rgba(100,255,100,200);
+border-color:rgba(255,255,255,30);
+border-style:inset;
+color:rgba(0,0,0,100);
+}
+QPushButton:hover{
+background-color:rgba(100,255,100,100);
+border-color:rgba(255,255,255,200);
+color:rgba(0,0,0,200);
+}</string>
     </property>
     <property name="text">
      <string>退出</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="clear_button">
+   <widget class="QPushButton" name="save_button">
     <property name="geometry">
      <rect>
-      <x>290</x>
-      <y>410</y>
+      <x>420</x>
+      <y>430</y>
       <width>71</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+
+}
+QPushButton:pressed{
+background-color:rgba(100,255,100,200);
+border-color:rgba(255,255,255,30);
+border-style:inset;
+color:rgba(0,0,0,100);
+}
+QPushButton:hover{
+background-color:rgba(100,255,100,100);
+border-color:rgba(255,255,255,200);
+color:rgba(0,0,0,200);
+}</string>
+    </property>
+    <property name="text">
+     <string>保存</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="clear_button">
+    <property name="geometry">
+     <rect>
+      <x>510</x>
+      <y>430</y>
+      <width>71</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{
+
+}
+QPushButton:pressed{
+background-color:rgba(100,255,100,200);
+border-color:rgba(255,255,255,30);
+border-style:inset;
+color:rgba(0,0,0,100);
+}
+QPushButton:hover{
+background-color:rgba(100,255,100,100);
+border-color:rgba(255,255,255,200);
+color:rgba(0,0,0,200);
+}</string>
     </property>
     <property name="text">
      <string>清除</string>

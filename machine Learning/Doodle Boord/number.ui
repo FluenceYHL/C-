@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>number</class>
+ <widget class="QDialog" name="number">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>263</width>
+    <height>147</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>30</y>
+     <width>113</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLineEdit{ 
+background:rgba(0,0,0,0%); 
+border:1px; 
+font:10pt
+}
+QLineEdit:hover{ 
+border-image:url(:/btn_background.png);
+ }
+QLineEdit:!hover{
+background:rgba(0,0,0,0%);
+}
+QLineEdit:focus {
+background:white;
+border-image:none; 
+border:1px groove lightgray; 
+border-radius:2px
+}</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="pushButton">
+   <property name="geometry">
+    <rect>
+     <x>90</x>
+     <y>80</y>
+     <width>89</width>
+     <height>41</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QPushButton{
+
+}
+QPushButton:pressed{
+background-color:rgba(100,255,100,200);
+border-color:rgba(255,255,255,30);
+border-style:inset;
+color:rgba(0,0,0,100);
+}
+QPushButton:hover{
+background-color:rgba(100,255,100,100);
+border-color:rgba(255,255,255,200);
+color:rgba(0,0,0,200);
+}</string>
+   </property>
+   <property name="text">
+    <string>确定</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>30</y>
+     <width>67</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel
+{
+background-color: gainsboro;
+border-image: url(@skinpath/icons/map_background.png);
+}</string>
+   </property>
+   <property name="text">
+    <string>输入数字</string>
+   </property>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
